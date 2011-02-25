@@ -1,0 +1,130 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Contentflow
+ *
+ * @author
+ * Stefan Auditor <stefan.auditor@erdfisch.de>
+ */
+
+/**
+ * Implement HOOK_field_formatter_info().
+ */
+function contentflow_field_formatter_info() {
+  return array(
+    'default' => array(
+      'label' => t('Contentflow'),
+      'field types' => array('filefield'),
+      'multiple values' => CONTENT_HANDLE_MODULE,
+    ),
+  );
+}
+
+/**
+ * Implement HOOK_theme().
+ */
+function contentflow_theme() {
+  return array(
+    'contentflow_formatter_default' => array(
+      'arguments' => array('element' => NULL),
+      'function' => 'theme_contentflow_formatter_contentflow',
+    ),
+    'contentflow' => array(
+      'arguments' => array('elements' => NULL),
+      'template' => 'templates/contentflow',
+    ),
+    'contentflow_item' => array(
+      'arguments' => array('element' => NULL),
+      'template' => 'templates/contentflow-item',
+    ),
+  );
+}
+
+/**
+ * Custom default formatter
+ */
+function contentflow_formatter_default($element) {
+  return $element;
+}
+
+/**
+ * Default formatter
+ * @ingroup themeable
+ */
+function theme_contentflow_formatter_contentflow($elements) {
+  $items = array();
+  foreach ($elements as $key => $element) {
+    if (is_numeric($key)) {
+      $items[] = theme('contentflow_item', $element);
+    }
+  }
+  return theme('contentflow', $items);
+}
+
+/**
+ * Contentflow preprocessor
+ */
+function template_preprocess_contentflow(&$variables) {
+  drupal_add_css('sites/all/libraries/contentflow/contentflow.css');
+  drupal_add_css(drupal_get_path('module', 'contentflow') . '/css/contentflow.css');
+  $settings = array(
+    'contentflow' => array(
+      'loadingTimeout'       => '30000',
+      'activeElement'        => 'content',
+      'maxItemHeight'        => 0,
+      'scaleFactor'          => 1.0,
+      'scaleFactorLandscape' => 1.3,
+      'scaleFactorPortrait'  => 1.0,
+      'fixItemSize'          => false,
+      'relativeItemPosition' => 'top center',
+      'circularFlow'         => true,
+      'verticalFlow'         => false,
+      'visibleItems'         => -1,
+      'endOpacity'           => 1,
+      'startItem'            => 'center',
+      'scrollInFrom'         => 'pre',
+      'flowSpeedFactor'      => 1.0,
+      'flowDragFriction'     => 1.0,
+      'scrollWheelSpeed'     => 1.0,
+      'reflectionColor'      => 'transparent',
+      'reflectionHeight'     => 0.5,
+      'reflectionGap'        => 0.0
+    ),
+  );
+  drupal_add_js($settings, 'setting');
+  drupal_add_js('sites/all/libraries/contentflow/contentflow.js');
+  drupal_add_js(drupal_get_path('module', 'contentflow') . '/js/contentflow.js');
+
+  $elements = $variables['elements'];
+  $content = '';
+  if (is_array($elements)) {
+    foreach ($elements as $element) {
+      $content .= $element;
+    }
+  }
+  $variables['content'] = $content;
+}
+
+/**
+ * Contentflow item preprocessor
+ */
+function template_preprocess_contentflow_item(&$variables) {
+  $item = $variables['element']['#item'];
+
+  $variables['fid']       = $item['fid'];
+  $variables['filename']  = $item['filename'];
+  $variables['filepath']  = file_create_path($item['filepath']);
+  $variables['filemime']  = $item['filemime'];
+  $variables['filesize']  = $item['filesize'];
+  $variables['status']    = $item['status'];
+  $variables['timestamp'] = $item['timestamp'];
+  $variables['list']      = $item['list'];
+  $variables['label']     = $variables['id'];
+
+  $variables['alt']         = $item['data']['alt']         ? $item['data']['alt']         : $item['filename'];
+  $variables['title']       = $item['data']['title']       ? $item['data']['title']       : $item['filename'];
+  $variables['description'] = $item['data']['description'] ? $item['data']['description'] : $item['filename'];
+}
+

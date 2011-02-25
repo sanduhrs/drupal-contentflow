@@ -1,0 +1,4 @@
+; $Id$
+name = Contentflow
+description = Contentflow views style plugin
+core = 6.x

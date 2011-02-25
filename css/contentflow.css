@@ -1,0 +1,72 @@
+// $Id$
+
+/**
+ * @file
+ * Contentflow for Drupal
+ *
+ * @author
+ * Stefan Auditor <stefan.auditor@erdfisch.de>
+ */
+
+.ContentFlowAddOn_drupal {
+  background: white !important;
+  border: 10px solid red;
+}
+
+.ContentFlowAddOn_drupal .flow .item .caption {
+  background: url(img/1x1_0.5_white.png);
+}
+
+* html .ContentFlowAddOn_white .flow .item .caption {
+  background-image: none;
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='img/1x1_0.5_white.png');
+}
+
+.ContentFlowAddOn_drupal .flow .item .caption a,
+.ContentFlowAddOn_drupal .flow .item .caption a:link,
+.ContentFlowAddOn_drupal .flow .item .caption a:visited,
+.ContentFlowAddOn_drupal .flow .item .caption a:active,
+.ContentFlowAddOn_drupal .flow .item .caption a:hover {
+  color: black;
+}
+
+.ContentFlowAddOn_drupal .scrollbar {
+  background: url(img/scrollbar_black.png) left center repeat-x;
+}
+
+.ContentFlowAddOn_drupal .scrollbar .slider {
+  background: url(img/slider_black.png) center center no-repeat;
+}
+        
+/* only for IE <= 6 and a alphatransparent slider image */
+* html .ContentFlowAddOn_drupal .scrollbar .slider { background-image: none; }
+* html .ContentFlowAddOn_drupal .scrollbar .slider .virtualSlider {
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=crop, src='img/slider_black.png');
+}
+
+.ContentFlowAddOn_drupal .scrollbar .slider .position {
+  color:gray; 
+}
+
+.ContentFlowAddOn_drupal .globalCaption {
+  color: black;
+}
+.ContentFlowAddOn_drupal .globalCaption .caption a,
+.ContentFlowAddOn_drupal .globalCaption .caption a:link,
+.ContentFlowAddOn_drupal .globalCaption .caption a:visited,
+.ContentFlowAddOn_whitdrupal .globalCaption .caption a:active,
+.ContentFlowAddOn_drupal .globalCaption .caption a:hover {
+  color: black;
+}
+
+.ContentFlowAddOn_drupal .loadIndicator {
+  background: url(img/1x1_0.5_white.png);
+}
+* html .ContentFlowAddOn_drupal .loadIndicator {
+  background-image: none;
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='img/1x1_0.5_white.png');
+}
+.ContentFlowAddOn_drupal .loadIndicator .indicator {
+  background: url(img/loader_white.gif) center center no-repeat;
+}
+

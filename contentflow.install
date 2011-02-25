@@ -1,0 +1,20 @@
+<?php
+// $Id$
+
+/**
+ *
+ */
+
+/**
+ * Implement HOOK_install().
+ */
+function contentflow_install() {
+}
+
+/**
+ * Implement HOOK_uninstall().
+ */
+function contentflow_uninstall() {
+  db_qeury("DELETE FROM {variable} WHERE name LIKE 'contentflow%%'");
+}
+
